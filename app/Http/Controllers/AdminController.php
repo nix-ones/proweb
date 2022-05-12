@@ -15,8 +15,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = Users::with('role')->first()->get();
-        dd($users);
+        $users = Users::all();
         return view('admin', compact('users'));
     }
 

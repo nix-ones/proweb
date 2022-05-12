@@ -23,6 +23,8 @@ Route::get('/', function () {
 Route::GET('login', [UsersController::class, 'index']);
 Route::GET('sign', [UsersController::class, 'create']);
 Route::POST('create/user', [UsersController::class, 'store']);
+Route::GET('profil', [UsersController::class, 'profil']);
+
 
 
 
@@ -34,6 +36,10 @@ Route::GET('/dashbord/commande/form', [commandeController::class, 'create']);
 
 
 Route::GET('/dashbord/article', [ArticleController::class, 'index']);
+Route::GET('/dashbord/form', [ArticleController::class, 'create']);
+Route::GET('/delete/article/{id}', [ArticleController::class, 'delete']);
+
 
 Route::GET('/dashbord/produit', [ProduitController::class, 'index']);
+Route::GET('/dashbord/formProduit', [ProduitController::class, 'create']);
 Route::POST('/create/produit', [ProduitController::class, 'store']);

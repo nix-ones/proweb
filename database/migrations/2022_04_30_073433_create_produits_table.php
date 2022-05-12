@@ -20,6 +20,7 @@ class CreateProduitsTable extends Migration
             $table->integer('prix');
             $table->text('desc');
             $table->float('qtiteproduit');
+            $table->string('img');
 
 
             $table->unsignedBigInteger('id_categorie');
@@ -39,4 +40,5 @@ class CreateProduitsTable extends Migration
     {
         Schema::dropIfExists('produits');
     }
+
 }
