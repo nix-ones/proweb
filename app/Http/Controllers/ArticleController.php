@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articles;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -13,7 +14,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('article');
+        $articles = Articles::all();
+        return view('article',compact('articles'));
     }
 
     /**
@@ -23,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+       return view('formArticle');
     }
 
     /**
@@ -34,7 +36,27 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titre' => 'required ',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'article' => 'required',
+
+
+        ]);
+
+
+
+
+
+
+        $articles = new Articles();
+        $articles->titre = request('titre');
+        $articles->img = request('img');
+        $articles->article = request('article');
+        $articles->save();
+        return redirect('/dashbord/article')->with('message','Success!!');
+
+
     }
 
     /**
@@ -43,9 +65,12 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function delete($id)
     {
-        //
+
+        $date = Articles::find($id);
+        $date->delete();
+        return redirect('/dashbord/article')->with('message','Success!!');
     }
 
     /**
@@ -56,7 +81,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+
+
     }
 
     /**

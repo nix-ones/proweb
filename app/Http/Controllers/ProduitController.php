@@ -14,8 +14,8 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        $categories = Categories:: all();
-        return view('produit', compact('categories'));
+        $produits = Produits::all();
+        return view('produit', compact('produits'));
     }
 
     /**
@@ -25,7 +25,8 @@ class ProduitController extends Controller
      */
     public function create()
     {
-
+        $categories = Categories:: all();
+        return view('formProduit', compact('categories'));
     }
 
     /**
@@ -34,10 +35,30 @@ class ProduitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        echo "je suis ici";
+    public function store(Request $request){
+
+
+        $request->validate([
+            'titre' => 'required ',
+            'prix' => 'required',
+            'cat' => 'required',
+            'desc' => 'required',
+            'qtite' => 'required',
+            //'img' => 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip'
+        ]);
+
+        $produit = new Produits();
+        $produit->titre = request('titre');
+        $produit->titre = request('desc');
+        $produit->desc = request('prix');
+        $produit->id_categorie = request('categorie');
+        $produit->qtiteproduit = request('qtite');
+        $produit->img = request('img');
+        $produit->save();
+
     }
+
+
 
     /**
      * Display the specified resource.

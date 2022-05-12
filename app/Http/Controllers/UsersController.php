@@ -18,6 +18,10 @@ class UsersController extends Controller
     {
         return view('login');
     }
+    public function profil()
+    {
+        return view('profil');
+    }
 
     /**
      * Show the form for creating a new resource.
